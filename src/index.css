@@ -1,0 +1,20 @@
+/* RESET VITE DEFAULT STYLES — they break your layout */
+:root {
+  color-scheme: light;
+}
+
+/* REMOVE ALL VITE DEFAULT BODY RULES */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background: #f5f1ea;
+}
+
+/* root container */
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: block; /* IMPORTANT: prevents flex centering */
+}
