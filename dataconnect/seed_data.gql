@@ -1,0 +1,85 @@
+mutation CreateSeedData @transaction @auth(level: NO_ACCESS) {
+  department_insertMany(data: [
+    {
+      id: "550e8400-e29b-41d4-a716-446655440000",
+      code: "CS",
+      contactEmail: "cs-contact@example.com",
+      contactPerson: "John Doe",
+      name: "Computer Science"
+    },
+    {
+      id: "550e8400-e29b-41d4-a716-446655440001",
+      code: "EE",
+      contactEmail: "ee-contact@example.com",
+      contactPerson: "Jane Smith",
+      name: "Electrical Engineering"
+    }
+  ])
+  user_insertMany(data: [
+    {
+      id: "650e8400-e29b-41d4-a716-446655440002",
+      email: "employer1@example.com",
+      firstName: "Bob",
+      lastName: "Employer",
+      role: "employer",
+      username: "bobemployer"
+    },
+    {
+      id: "750e8400-e29b-41d4-a716-446655440003",
+      email: "student1@example.com",
+      firstName: "Alice",
+      lastName: "Student",
+      role: "student",
+      username: "alicestudent",
+      universityId: "1234567"
+    }
+  ])
+  jobPosting_insertMany(data: [
+    {
+      id: "850e8400-e29b-41d4-a716-446655440004",
+      departmentId: "550e8400-e29b-41d4-a716-446655440000",
+      employerId: "650e8400-e29b-41d4-a716-446655440002",
+      description: "Software Engineering Internship",
+      hoursPerWeek: 20,
+      location: "Remote",
+      payRate: 25.0,
+      requiredSkills: ["Java", "Python", "Git"],
+      status: "open",
+      title: "Software Engineer Intern"
+    },
+    {
+      id: "950e8400-e29b-41d4-a716-446655440005",
+      departmentId: "550e8400-e29b-41d4-a716-446655440001",
+      employerId: "650e8400-e29b-41d4-a716-446655440002",
+      description: "Electrical Engineering Internship",
+      hoursPerWeek: 25,
+      location: "On-site",
+      payRate: 28.0,
+      requiredSkills: ["Circuit Design", "MATLAB", "Simulink"],
+      status: "open",
+      title: "Electrical Engineer Intern"
+    }
+  ])
+  workStudyEligibility_insertMany(data: [
+    {
+      id: "a50e8400-e29b-41d4-a716-446655440006",
+      studentId: "750e8400-e29b-41d4-a716-446655440003",
+      eligibleAmount: 5000.0,
+      endDate: "2024-12-31",
+      financialAidYear: 2024,
+      remainingAmount: 2500.0,
+      startDate: "2024-01-01"
+    }
+  ])
+ application_insertMany(data: [
+    {
+      id: "b50e8400-e29b-41d4-a716-446655440007",
+      jobPostingId: "850e8400-e29b-41d4-a716-446655440004",
+      studentId: "750e8400-e29b-41d4-a716-446655440003",
+      applicationDate: "2024-06-01T00:00:00Z",
+      coverLetter: "Enthusiastic applicant...",
+      resumeLink: "http://example.com/resume.pdf",
+      status: "pending"
+    }
+  ])
+}

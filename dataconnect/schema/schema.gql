@@ -1,0 +1,45 @@
+type User @table {
+  username: String!
+  email: String!
+  role: String! # STUDENT, EMPLOYER, ADMINISTRATOR
+  firstName: String
+  lastName: String
+  universityId: String
+}
+
+type JobPosting @table {
+  employer: User!
+  title: String!
+  description: String!
+  hoursPerWeek: Int!
+  payRate: Float!
+  status: String! # PENDING_APPROVAL, ACTIVE, CLOSED
+  department: Department
+  requiredSkills: [String]
+  location: String
+}
+
+type Application @table {
+  student: User!
+  jobPosting: JobPosting!
+  applicationDate: Timestamp!
+  status: String! # SUBMITTED, REVIEWED, INTERVIEW_SCHEDULED, OFFERED, HIRED, REJECTED
+  coverLetter: String
+  resumeLink: String
+}
+
+type WorkStudyEligibility @table {
+  student: User!
+  financialAidYear: Int!
+  eligibleAmount: Float!
+  remainingAmount: Float!
+  startDate: Date
+  endDate: Date
+}
+
+type Department @table {
+  name: String!
+  code: String!
+  contactPerson: String
+  contactEmail: String
+}

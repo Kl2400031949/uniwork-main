@@ -1,0 +1,61 @@
+mutation AddNewJobPosting(
+  $employerId: UUID!
+  $description: String!
+  $hoursPerWeek: Int!
+  $payRate: Float!
+  $status: String!
+  $title: String!
+) @auth(level: USER) {
+  jobPosting_insert(
+    data: {
+      employerId: $employerId
+      description: $description
+      hoursPerWeek: $hoursPerWeek
+      payRate: $payRate
+      status: $status
+      title: $title
+    }
+  )
+}
+
+query GetJobPostingsByDepartment($departmentId: UUID!) @auth(level: PUBLIC, insecureReason: "This operation is safe to expose to the public") {
+  jobPostings(where: { departmentId: { eq: $departmentId } }) {
+    id
+    title
+    description
+    hoursPerWeek
+    payRate
+    status
+  }
+}
+
+mutation ApplyForJob(
+  $jobPostingId: UUID!
+  $studentId: UUID!
+  $applicationDate: Timestamp!
+  $coverLetter: String
+  $resumeLink: String
+  $status: String!
+) @auth(level: USER) {
+  application_insert(
+    data: {
+      jobPostingId: $jobPostingId
+      studentId: $studentId
+      applicationDate: $applicationDate
+      coverLetter: $coverLetter
+      resumeLink: $resumeLink
+      status: $status
+    }
+  )
+}
+
+query GetWorkStudyEligibilityForStudent @auth(level: USER) {
+  workStudyEligibilities(where: { studentId: { eq_expr: "auth.uid" } }) {
+    id
+    eligibleAmount
+    endDate
+    financialAidYear
+    remainingAmount
+    startDate
+  }
+}
